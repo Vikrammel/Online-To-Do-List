@@ -1,0 +1,22 @@
+#content {
+    padding-top: 12%;
+    padding-bottom: 12%;
+    color: white;
+}
+
+input {
+    margin-bottom: 2%;
+}
+
+#task {
+    padding-right: 8%;
+}
+
+#notes {
+    padding-right: 8%;
+    padding-bottom: 5%;
+}
+
+form a {
+    padding-left: 2%;
+}

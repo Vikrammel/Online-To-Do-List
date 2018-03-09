@@ -1,0 +1,33 @@
+.img-align {
+    position: relative;
+    right: 6%;
+}
+
+#fieldList {
+    position: relative;
+    right: 7%;
+}
+
+.list-item-text {
+    color: white;
+    max-width: 45%;
+    position: relative;
+    left: 27.5%;
+}
+
+.list-item-heading {
+    color: white;
+}
+
+img {
+    max-height: 10%;
+    max-width: 10%;
+    height: auto;
+    width: auto;
+    border-radius: 50%;
+}
+
+#content table{
+    color: white;
+    margin-left: 36%;
+}
