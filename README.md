@@ -18,4 +18,4 @@ using SQLite3.
 - Install bottle with `pip install bottle`
 - Clone/download the repository
 - `python controller.py`
-- navigate to [http://localhost:8080/list](http://localhost:8080/list)
+- navigate to [http://localhost:8080](http://localhost:8080/list)
