@@ -23,13 +23,15 @@ def serveStyle(filename):
     return static_file(filename, root='./css/')
 
 #home routes
-@route('/')
-@route('/index')
-def serveIndex():
-    return static_file('index.html', root="./")
+# @route('/')
+# @route('/index')
+# def serveIndex():
+#     return static_file('index.html', root="./")
 
 #todo-list route
-@route('/list')
+@route('/')
+@route('/home')
+@route('/index')
 def serveTodo():
     conn = sqlite3.connect('todo.db')
     c = conn.cursor()
@@ -39,7 +41,7 @@ def serveTodo():
         newTable = c.execute('SELECT * FROM todo WHERE done LIKE 0 ORDER BY ' + dateType + " " + order)
     else:
         newTable = c.execute('SELECT * FROM todo ORDER BY ' + dateType + " " + order)
-    return template('./templates/todo', listFromDB=newTable)
+    return template('index', listFromDB=newTable)
 
 #new task route
 @route('/new', method=['GET','POST'])
@@ -53,8 +55,10 @@ def new_item():
         posted = datetime.now()
         updated = datetime.now()
         conn = sqlite3.connect('todo.db')
-        done = 0
-        
+        done = request.POST.get('done')
+        if done: done = 1
+        else: done = 0
+
         #db manipulation
         c = conn.cursor()
         cursor = c.execute('SELECT max(id) FROM todo')
@@ -63,10 +67,11 @@ def new_item():
         c.execute("INSERT INTO todo VALUES (?,?,?,?,?,?,?)", (max_id,task,notes,due,posted,updated,done))
         conn.commit()
 
-        return redirect('/list')
+        return redirect('/')
 
     else:
-        return template('todoForm')
+        print("returning newTask")
+        return template('newTask')
 
 #edit routes (links from edit form go to /edit/<linkurl>)
 
@@ -97,7 +102,7 @@ def serveEdit(id=0):
         conn.commit()
 
         # redirect to todolist
-        return redirect('/list')
+        return redirect('/')
 
     else:
         #get task details to prepolulate form fields
@@ -123,7 +128,7 @@ def serveDelete(id=0):
     c.execute('DELETE FROM todo WHERE id LIKE '+str(id))
     conn.commit()
 
-    return redirect('/list')
+    return redirect('/')
 
 
 #route for showing different list elements based on completion
@@ -137,7 +142,7 @@ def serveShow(showType):
     else:
         subset = 'all'
 
-    return redirect('/list')
+    return redirect('/')
 
 #route for sorting list different ways
 @route ('/sort/<sortBy>')
@@ -147,11 +152,11 @@ def serveSort(sortBy):
     if order == 'ASC': order = 'DESC'
     else: order = 'ASC'
 
-    return redirect('/list')
+    return redirect('/')
 
 #run
-run()
+# run()
 
 #run-dev
-# debug(True)
-# run(host='localhost', port=8080, reloader=True)
+debug(True)
+run(host='localhost', port=8080, reloader=True)

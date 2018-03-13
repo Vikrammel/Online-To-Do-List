@@ -27,7 +27,32 @@ img {
     border-radius: 50%;
 }
 
-#content table{
+/* #content{
     color: white;
-    margin-left: 36%;
+} */
+
+#content #error{
+    color: red;
+}
+
+table{
+    display: inline-block;
+    color: white;
+    /* float: center; */
+    /* margin-left: 25%; */
+}
+
+#right-sidebar #newButton{
+    position: absolute;
+    top: 10%;
+    right: 3%;
+}
+
+table td{
+    padding-right: 5%;
+    border: thin solid white;
+}
+
+button{
+    margin-right: 2%;
 }

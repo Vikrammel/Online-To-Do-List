@@ -1,22 +1,27 @@
-#content {
+/* #content {
     padding-top: 12%;
     padding-bottom: 12%;
     color: white;
+} */
+#newForm{
+    /* position: absolute; */
+    left: 50%;
+    margin-bottom: 3%;
 }
 
-input {
+#newForm input {
     margin-bottom: 2%;
 }
 
-#task {
+#newForm #task {
     padding-right: 8%;
 }
 
-#notes {
+#newForm #notes {
     padding-right: 8%;
     padding-bottom: 5%;
 }
 
-form a {
+#newForm form a {
     padding-left: 2%;
 }

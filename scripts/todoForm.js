@@ -23,6 +23,8 @@ function setDate(){
 //function to validate form and alert if entries are invalid
 function submitForm(){
     document.form.method="GET"; //so that form doesn't submit until we're sure entries are valid
+    var oldAction = document.form.action;
+    document.form.action="";
     var task = document.getElementById("task");
     var notes = document.getElementById("notes");
     var due = document.getElementById("due");
@@ -35,35 +37,42 @@ function submitForm(){
     var year = parseInt(date.getFullYear());
     var month = parseInt(date.getMonth()) + 1;
     var date = parseInt(date.getDate());
+    var date = new Date();
 
     if (String(task.value).length < 1){
         window.alert("Task field must not be blank");
+        window.location = '/';
         return;
     }
-    if (String(due.value).length < 1){
+    else if (String(due.value).length < 1){
         window.alert("Due date must be entered");
         return;
     }
-    if (dueArray[0] < year){
+   else if (dueArray[0] < year){
         window.alert("Due date's year must be today or later");
         return;
     }
     
-    if ((dueArray[0] == year) && (dueArray[1] < month)){
+    else if ((dueArray[0] == year) && (dueArray[1] < month)){
         console.log("old month");
         window.alert("Due date's month must be today or later");
         return;
     }
-    var date = new Date();
-    if ((dueArray[0] == year) && (dueArray[1] == month) && (dueArray[2] < date.getDate())){
+    else if ((dueArray[0] == year) && (dueArray[1] == month) && (dueArray[2] < date.getDate())){
         window.alert("Due date's date must be today or later");
         return;
     }
-    document.form.method="POST"; //since entries are valid, we can submit form
+    //since entries are valid, we can submit form
+    else{
+        document.form.method="POST";
+        document.form.action=oldAction;
+    }
 }
 
-//refs
-addRef("http://javascript-coder.com/html-form/html-form-action.phtml", "managing form actions with js");
+//function to remove 
+function removeNewForm(cancel){
+    var newForm = cancel.parentElement.parentElement;
+    var content = newForm.parentElement;
+    content.removeChild(newForm);
+}
 
-//notes
-addNote("There were very few issues adapting this page from client-side work to server-side");

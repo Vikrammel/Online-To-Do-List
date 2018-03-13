@@ -4,7 +4,7 @@ var header = document.getElementById("header");
 
 //create header content (text and line)
 var heading = document.createElement("h1");
-var headingText = document.createTextNode("CMPS183: Homework 3");
+var headingText = document.createTextNode("CMPS183: Homework 4");
 heading.appendChild(headingText);
 var line = document.createElement("hr");
 
@@ -37,9 +37,9 @@ function addLink(addToElement, link, text, title){
 }
 
 //make navbar links
-addLink("navbar", "index", "Home", "ho home");
-addLink("navbar", "list", "To Do List", "view todo list");
-addLink("navbar", "new", "To Do Form", "enter new todo list items");
+// addLink("navbar", "index", "Home", "ho home");
+addLink("navbar", "index", "To Do List", "view todo list");
+// addLink("navbar", "new", "To Do Form", "enter new todo list items");
 
 navbar.appendChild(document.createElement("hr")); //line
 
@@ -56,7 +56,6 @@ footer.appendChild(linksDiv); //add linksdiv  to footer
 var sidebar = document.getElementById("sidebar");
 
 //add References div to sidebar
-var sideLine = document.createElement("div");
 var refsDiv = document.createElement("div");
 refsDiv.setAttribute("id", "refsDiv");
 var refsHeading = document.createElement("h3");
@@ -64,7 +63,7 @@ refsHeading.setAttribute("id", "refsHeading");
 var refsHeadingText = document.createTextNode("Referenced");
 refsHeading.appendChild(refsHeadingText);
 refsDiv.appendChild(refsHeading);
-sidebar.appendChild(refsDiv);
+// sidebar.appendChild(refsDiv);
 
 //add list to refsDiv
 var refList = document.createElement("ul");
@@ -76,10 +75,16 @@ var notesDiv = document.createElement("div");
 notesDiv.setAttribute("id", "notesDiv");
 var notesHeading = document.createElement("h3");
 notesHeading.setAttribute("id", "notesHeading");
-var notesHeadingText = document.createTextNode("Notes");
+var notesHeadingText = document.createTextNode("Bonus Features");
 notesHeading.appendChild(notesHeadingText);
 notesDiv.appendChild(notesHeading);
-sidebar.appendChild(notesDiv);
+// sidebar.appendChild(notesDiv);
+
+//refs and notes wrapper div
+var refsNotesDiv = document.createElement("div");
+refsNotesDiv.appendChild(refsDiv);
+refsNotesDiv.appendChild(notesDiv);
+sidebar.appendChild(refsNotesDiv);
 
 //add list to notesDiv
 var noteList = document.createElement("ul");

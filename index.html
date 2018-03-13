@@ -2,10 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>CMPS183: Homework 3 | Index</title>
+        <title>CMPS183: Homework 4 | Home</title>
         <!-- link css stylesheets -->
         <link rel="stylesheet" href="css/header-footer-sidebar.css" type="text/css">
         <link rel="stylesheet" href="css/index.css" type="text/css">
+        <link rel="stylesheet" href="css/todoForm.css" type="text/css">
     </head>
     <body id="body">
 
@@ -16,90 +17,50 @@
             <div id="sidebar"></div>
 
             <div id="content">
-                <!-- profile content -->
-    
-                <div class="img-align">
-                    <img src="images/john-smith.jpg">
+                <div id="buttons">
+                    <button onclick="show('all');">show all</button>
+                    <button onclick="show('done');">show completed</button>
+                    <button onclick="show('notdone');">show remaining</button>
                 </div>
-                
-                <ul id="fieldList">
-                    <li class="list-item">
-                        <h4 class="list-item-heading">Name</h4>
-                        <p class="list-item-text">John Smith</p>
-                    </li>
-                    <li class="list-item">
-                        <h4 class="list-item-heading">Birthday</h4>
-                        <p class="list-item-text">January 6<sup>th</sup>, 1580</p>
-                    </li>
-                    <li class="list-item">
-                        <h4 class="list-item-heading">Current City/Town</h4>
-                        <p class="list-item-text">Jamestown, VA</p>
-                    </li>
-                    <li class="list-item">
-                        <h4 class="list-item-heading">Email</h4>
-                        <p class="list-item-text">jsmith@ucsc.edu</p>
-                    </li>
-                    <li class="list-item">
-                        <h4 class="list-item-heading">Bio</h4>
-                        <p class="list-item-text">John Smith was an english soldier, explorer,
-                            colonial governer, admiral of New England and an author. He had something
-                            to do with the creation of the first North American English colony.
-                        </p>
-                        <p class="list-item-text">That colony was Jamestown, VA. Why am I making a website
-                            about one of the founders of Jamestown, VA? I thought I'd put 'John Smith' as 
-                            a placeholder then googled it and found this dude. He mapped a bunch of new places
-                            in New England, trained people to farm so the colony didn't starve, and then had to go
-                            home to England after an "accidental gunpower explosion of gunpowder in a canoe" (???)
-                        </p>
-                    </li>
-                    <li class="list-item">
-                        <h4 class="list-item-heading">Classes</h4>
-                        <table>
-                            <tr>
-                                <th>Department</th>
-                                <th>Course #</th>
-                                <th>Course Title</th>
-                                <th>Quarter</th>
-                            </tr>
-                            <tr>
-                                <td>MATH</td>
-                                <td>101</td>
-                                <td>Algebra</td>
-                                <td>Fall</td>
-                            </tr>
-                            <tr>
-                                <td>BIOL</td>
-                                <td>123</td>
-                                <td>Cells</td>
-                                <td>Fall</td>
-                            </tr>
-                            <tr>
-                                <td>GEO</td>
-                                <td>141</td>
-                                <td>Americas</td>
-                                <td>Winter</td>
-                            </tr>
-                            <tr>
-                                <td>ANTH</td>
-                                <td>21</td>
-                                <td>Intro to Anthropology</td>
-                                <td>Winter</td>
-                            </tr>
-                            <tr>
-                                <td>HIST</td>
-                                <td>54</td>
-                                <td>American History</td>
-                                <td>Spring</td>
-                            </tr>
-                        </table>
-                    </li>
-                </ul>
+                <br />
+                <table id="list">
+                    <tr>
+                        <th>Task</th>
+                        <th>Notes</th>
+                        <th style="cursor:s-resize;" onclick="sort('due');">Due ↕</th>
+                        <th style="cursor:s-resize;" onclick="sort('posted');">Posted ↕</th>
+                        <th style="cursor:s-resize;" onclick="sort('updated');">Updated ↕</th>
+                        <th>Done</th>
+                    </tr>
+                    % for row in listFromDB:
+                    % isDone = "checked" if row[6] else ""
+                        <tr>
+                            % for col in row:
+                                % if row[0] == col:
+                                    <td class="element" style="display:none">{{col}}</td>
+                                % elif row[-1] == col:
+                                    <td class="element"><input type="checkbox" class="done" name=done value="done" {{isDone}}/></td>
+                                % else:
+                                    <td class="element">{{col}}</td>
+                                % end
+                            % end
+                            <td class="element"><button onclick="editTask(this, {{row[0]}});">edit</button></td>
+                            <td class="element"><button onclick="deleteTask(this);">delete</button></td>
+                        </tr>
+                    % end
+                </table>
+
+                <h4>note: click on table headers to sort</h4>
             </div>
+
+            <div id="right-sidebar"><div id="newButton"><button onclick="newItem();">New Item</button></div></div>
         </div>
         
         <div id ="footer"></div>
         <!-- link js scripts -->
         <script src="scripts/header-footer-sidebar.js" type="text/javascript"></script>
         <script src="scripts/index.js" type="text/javascript"></script>
+        <script src="scripts/todo.js" type="text/javascript"></script>
+        <script src="scripts/todoForm.js" type="text/javascript"></script>
     </body>
 </html>
