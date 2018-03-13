@@ -71,7 +71,7 @@ def new_item():
 
     else:
         print("returning newTask")
-        return template('newTask')
+        return template('./templates/newTask')
 
 #edit routes (links from edit form go to /edit/<linkurl>)
 
@@ -155,8 +155,8 @@ def serveSort(sortBy):
     return redirect('/')
 
 #run
-# run()
+run()
 
 #run-dev
-debug(True)
-run(host='localhost', port=8080, reloader=True)
+# debug(True)
+# run(host='localhost', port=8080, reloader=True)
